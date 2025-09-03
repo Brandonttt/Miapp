@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/textfields"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="TextFields" />
+    <item
+        android:id="@+id/botones"
+        android:icon="@android:drawable/ic_input_get"
+        android:title="Botones" />
+    <item
+        android:id="@+id/seleccion"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Selección" />
+    <item
+        android:id="@+id/listas"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Listas" />
+    <item
+        android:id="@+id/informacion"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Información" />
+</menu>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Elementos de Selección"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Los elementos de selección permiten al usuario elegir entre diferentes opciones o activar/desactivar funciones específicas."
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- CheckBox -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CheckBox"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Los CheckBox permiten seleccionar múltiples opciones de un grupo."
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pizza" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hamburguesa" />
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tacos" />
+
+        <Button
+            android:id="@+id/btnComprobarCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comprobar selección"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/resultadoCheckbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultado de la selección"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- RadioButton -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Los RadioButton permiten seleccionar una única opción de un grupo."
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opción 1" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opción 2" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opción 3" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnComprobarRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comprobar selección"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/resultadoRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultado de la selección"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Switch -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Switch"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Los Switch permiten activar o desactivar una opción, con una representación visual de on/off."
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <Switch
+            android:id="@+id/switchWifi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WiFi"
+            android:checked="false"
+            android:layout_marginTop="8dp" />
+
+        <Switch
+            android:id="@+id/switchBluetooth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bluetooth"
+            android:checked="false"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/resultadoSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estado de las conexiones"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp" />
+
+    </LinearLayout>
+</ScrollView>

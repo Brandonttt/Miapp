@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Campos de Texto (TextFields)"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Los campos de texto permiten al usuario ingresar y editar texto en la aplicación. Son la base para formularios e interacción con datos."
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- EditText básico -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EditText básico"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextBasico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Escribe algo aquí"
+            android:inputType="text"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/resultadoBasico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Texto ingresado: "
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- TextInputLayout con validación -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextInputLayout con validación"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Correo electrónico"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnValidar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Validar email"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- EditText para números -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EditText para números"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextNumero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa un número"
+            android:inputType="number"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/btnSumar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sumar +10"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/resultadoNumerico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultado de la suma: "
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+    </LinearLayout>
+</ScrollView>
