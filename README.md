@@ -1,16 +1,21 @@
 # Miapp
 
-![Screenshot_20250902_235713_Miapp](https://github.com/user-attachments/assets/537897e3-e9d0-4f6d-86ae-8e9b632add5d)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/537897e3-e9d0-4f6d-86ae-8e9b632add5d" width="300" alt="Pantalla 1" />
+</p>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e312ce33-bf2d-41cd-93cb-a90a02144943" width="300" alt="Pantalla 2" />
+</p>
 
-![Screenshot_20250902_235759_Miapp](https://github.com/user-attachments/assets/e312ce33-bf2d-41cd-93cb-a90a02144943)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e78a6c4f-26fa-470e-9ef2-868ac9af9f12" width="300" alt="Pantalla 3" />
+</p>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/29fddac7-0327-44a8-908b-948b1ff1cddd" width="300" alt="Pantalla 4" />
+</p>
 
-![Screenshot_20250902_235834_Miapp](https://github.com/user-attachments/assets/e78a6c4f-26fa-470e-9ef2-868ac9af9f12)
-
-
-![Screenshot_20250902_235850_Miapp](https://github.com/user-attachments/assets/29fddac7-0327-44a8-908b-948b1ff1cddd)
-
-
-![Screenshot_20250902_235917_Miapp](https://github.com/user-attachments/assets/1d76249a-381c-4e19-9ba0-5fc0983222b4)
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1d76249a-381c-4e19-9ba0-5fc0983222b4" width="300" alt="Pantalla 5" />
+</p>
