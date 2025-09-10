@@ -1,4 +1,4 @@
-# Miapp
+# Miapp - Tarea 1
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/537897e3-e9d0-4f6d-86ae-8e9b632add5d" width="300" alt="Pantalla 1" />
