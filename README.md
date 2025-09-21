@@ -23,3 +23,6 @@ Las listas, que nos desglosan varias opciones de un conjunto
 <p align="center">
   <img src="https://github.com/user-attachments/assets/1d76249a-381c-4e19-9ba0-5fc0983222b4" width="300" alt="Pantalla 5" />
 </p>
+
+En este apartado se visualiza el segundo activity que se reoresenta con una calculadora
+<img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/fecc8966-bbfe-45a6-9704-3f97b7ea568e" />
