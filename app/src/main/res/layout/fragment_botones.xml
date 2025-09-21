@@ -126,6 +126,13 @@
                 android:text="Un toggle button permite alternar entre dos estados, útil para activar o desactivar funciones."
                 android:layout_marginBottom="80dp" />
 
+            <Button
+                android:id="@+id/btnIrASecondActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ir a Segunda Activity"
+                android:layout_marginTop="16dp" />
+
         </LinearLayout>
 
     </ScrollView>

@@ -1,5 +1,6 @@
 package com.example.miapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,18 @@ class BotonesFragment : Fragment() {
         val botonNormal = view.findViewById<Button>(R.id.botonNormal)
         botonNormal.setOnClickListener {
             Toast.makeText(context, "¡Has pulsado el botón normal!", Toast.LENGTH_SHORT).show()
+        }
+
+        // Button para ir a SecondActivity
+        val btnIrASecondActivity = view.findViewById<Button>(R.id.btnIrASecondActivity)
+        btnIrASecondActivity.setOnClickListener {
+            val intent = Intent(requireActivity(), SecondActivity::class.java).apply {
+                // Puedes pasar datos a la segunda activity
+                putExtra("NOMBRE_USUARIO", "Usuario de Prueba")
+                putExtra("CONTADOR", contadorClicks)
+                putExtra("ES_VIP", true)
+            }
+            startActivity(intent)
         }
 
         // Button con estilo personalizado
