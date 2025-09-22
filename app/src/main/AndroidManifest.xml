@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Miapp" >
         <activity
+            android:name=".CalculatorActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".SecondActivity"
             android:exported="false" />
         <activity
