@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="400dp"
+    android:viewportWidth="100"
+    android:viewportHeight="200">
+    <!-- Silueta simple de cuerpo humano -->
+    <path
+        android:pathData="M50,20
+                          m-10,0
+                          a10,10 0 1,0 20,0
+                          a10,10 0 1,0 -20,0"
+        android:fillColor="#999"/>
+    <path
+        android:pathData="M50,30 L50,60 M50,60 L30,120 M50,60 L70,120 M30,120 L30,190 M70,120 L70,190"
+        android:strokeColor="#000"
+        android:strokeWidth="4"/>
+</vector>

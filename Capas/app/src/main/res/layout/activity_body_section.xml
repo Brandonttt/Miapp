@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/section_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/section_background"
+    tools:context=".BodySectionActivity">
+
+    <TextView
+        android:id="@+id/section_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Cabeza" />
+
+    <ImageView
+        android:id="@+id/section_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Imagen de la sección del cuerpo"
+        android:transitionName="shared_body_transition"
+        app:layout_constraintBottom_toTopOf="@+id/section_info_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/section_title"
+        app:layout_constraintWidth_percent="0.7"
+        tools:src="@drawable/head_detail" />
+
+    <!-- Container para puntos de interés -->
+    <FrameLayout
+        android:id="@+id/points_of_interest_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/section_image"
+        app:layout_constraintEnd_toEndOf="@+id/section_image"
+        app:layout_constraintStart_toStartOf="@+id/section_image"
+        app:layout_constraintTop_toTopOf="@+id/section_image">
+
+        <!-- Puntos de interés para la cabeza -->
+        <View
+            android:id="@+id/poi_eyes"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/poi_indicator"
+            android:clickable="true"
+            android:focusable="true"
+            android:transitionName="shared_part_transition"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/poi_mouth"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/poi_indicator"
+            android:clickable="true"
+            android:focusable="true"
+            android:transitionName="shared_part_transition"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/poi_brain"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/poi_indicator"
+            android:clickable="true"
+            android:focusable="true"
+            android:transitionName="shared_part_transition"
+            android:visibility="gone" />
+
+        <!-- Puntos de interés para el torso -->
+        <View
+            android:id="@+id/poi_heart"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="-30dp"
+            android:layout_marginTop="-30dp"
+            android:background="@drawable/poi_indicator"
+            android:clickable="true"
+            android:focusable="true"
+            android:transitionName="shared_part_transition"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/poi_lungs"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-50dp"
+            android:background="@drawable/poi_indicator"
+            android:clickable="true"
+            android:focusable="true"
+            android:transitionName="shared_part_transition"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/poi_stomach"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/poi_indicator"
+            android:clickable="true"
+            android:focusable="true"
+            android:transitionName="shared_part_transition"
+            android:visibility="gone" />
+
+        <!-- Puntos de interés para las piernas -->
+        <View
+            android:id="@+id/poi_knee"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/poi_indicator"
+            android:clickable="true"
+            android:focusable="true"
+            android:transitionName="shared_part_transition"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/poi_thigh"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/poi_indicator"
+            android:clickable="true"
+            android:focusable="true"
+            android:transitionName="shared_part_transition"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/poi_foot"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/poi_indicator"
+            android:clickable="true"
+            android:focusable="true"
+            android:transitionName="shared_part_transition"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/section_info_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/info_panel_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
