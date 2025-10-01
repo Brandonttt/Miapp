@@ -1,8 +1,8 @@
-# Miapp - Aplicación de Demostración de Componentes Android
+# Miapp 
 
 ## Descripción del Proyecto
 
-Miapp es una aplicación Android desarrollada como parte de una tarea académica que muestra diferentes componentes de la interfaz de usuario de Android. La aplicación incluye múltiples pantallas con diversos elementos interactivos como campos de texto, botones, checkboxes, listas desplegables y una calculadora funcional.
+Miapp es una aplicación Android desarrollada como parte de una tarea donde se muestran los diferentes componentes de la interfaz de usuario de Android. La aplicación incluye múltiples pantallas con diversos elementos interactivos como campos de texto, botones, checkboxes, listas desplegables y una calculadora funcional.
 
 El objetivo principal del proyecto es demostrar el uso y la implementación correcta de diferentes widgets y componentes de UI en una aplicación Android, así como la navegación entre actividades.
 
@@ -18,7 +18,7 @@ El objetivo principal del proyecto es demostrar el uso y la implementación corr
 2. **Componentes interactivos** - Botones con cambio de color y contadores
 3. **Elementos de selección** - Checkboxes y switches
 4. **Listas desplegables** - Menús con múltiples opciones
-5. **Calculadora** - Implementación de una calculadora funcional en una actividad separada
+5. **Calculadora** - Implementación de una calculadora funcional en un Activity
 
 ## Capturas de Pantalla
 
@@ -63,7 +63,7 @@ Esta pantalla implementa una calculadora funcional en una segunda actividad, dem
 ### Requisitos Previos
 - Android Studio (versión recomendada: última estable)
 - JDK 8 o superior
-- Dispositivo Android o emulador con API 21 (Android 5.0) o superior
+- Dispositivo Android o emulador 
 
 ### Pasos para Ejecutar
 1. Clonar el repositorio:
@@ -98,23 +98,7 @@ Para probar la aplicación:
 **Problema:** Implementar validación en tiempo real para campos como el correo electrónico.
 **Solución:** Utilicé TextWatcher para monitorear los cambios en los EditText y aplicar patrones regex para validar el formato del correo electrónico.
 
-### Desafío 3: Diseño Responsive
-**Problema:** Asegurar que la aplicación se vea bien en diferentes tamaños de pantalla.
-**Solución:** Implementé layouts con ConstraintLayout y utilicé dimensiones relativas en lugar de valores fijos para asegurar la adaptabilidad a diferentes tamaños de pantalla.
 
-## Hallazgos y Aprendizajes
-
-1. **Arquitectura de la Aplicación:** Comprendí la importancia de estructurar adecuadamente una aplicación Android para facilitar su mantenimiento y escalabilidad.
-
-2. **Patrones de Diseño de UI:** Aprendí sobre las mejores prácticas para diseñar interfaces de usuario intuitivas y accesibles en Android.
-
-3. **Manejo de Eventos:** Profundicé en la implementación de listeners y el manejo eficiente de las interacciones del usuario.
-
-4. **Navegación:** Mejoré mi comprensión sobre los diferentes métodos de navegación entre actividades y fragmentos en Android.
-
-5. **Optimización de Rendimiento:** Descubrí técnicas para mejorar el rendimiento de la aplicación, como la reutilización de vistas y la optimización de layouts.
-
-## Contribución
 
 Si deseas contribuir a este proyecto, por favor:
 1. Haz un fork del repositorio
@@ -125,8 +109,6 @@ Si deseas contribuir a este proyecto, por favor:
 
 ## Autor
 
-Brandon - [@Brandonttt](https://github.com/Brandonttt)
+Brandon - [@Brandonttt](https://github.com/Brandonttt) y copilot
 
-## Licencia
 
-Este proyecto está bajo licencia [MIT](https://choosealicense.com/licenses/mit/) - ver el archivo LICENSE.md para más detalles.
