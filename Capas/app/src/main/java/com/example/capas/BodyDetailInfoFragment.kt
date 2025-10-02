@@ -9,7 +9,6 @@ import android.widget.TextView
 import android.text.Html
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 
 class BodyDetailInfoFragment : Fragment() {
@@ -40,27 +39,15 @@ class BodyDetailInfoFragment : Fragment() {
         val infoText = view.findViewById<TextView>(R.id.detail_info_text)
         val titleText = view.findViewById<TextView>(R.id.detail_title)
         val bodyImage = view.findViewById<ImageView>(R.id.body_image)
-        val detailImage = view.findViewById<ImageView>(R.id.detail_image)
-        val descriptionView = view.findViewById<TextView>(R.id.detail_description)
-        val imageContainer = view.findViewById<LinearLayout>(R.id.image_container)
 
         // Establecer el título según la parte del cuerpo
         titleText.text = partName ?: "Parte del cuerpo"
 
-        // Establecer la descripción recibida
-        descriptionView.text = partDescription
-
-        // Mostrar la imagen específica de la parte
-        detailImage.setImageResource(partImageId)
-
-        // Aplicar animaciones
-        val fadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
+        // Aplicar animaciones solo al contenido que existe
         val slideUp = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
+        infoText.startAnimation(slideUp)
 
-        detailImage.startAnimation(fadeIn)
-        descriptionView.startAnimation(slideUp)
-
-        // Cambiar la imagen según la parte del cuerpo
+        // Cambiar la imagen según la parte del cuerpo - USAR SOLO PNG
         val imageResource = when (partName) {
             "Ojos" -> R.drawable.eyes
             "Boca" -> R.drawable.mouth
@@ -71,13 +58,13 @@ class BodyDetailInfoFragment : Fragment() {
             "Rodilla" -> R.drawable.knee
             "Muslo" -> R.drawable.thigh
             "Pie" -> R.drawable.foot
-            else -> R.drawable.human_body // Imagen del cuerpo completo por defecto
+            else -> R.drawable.human_body
         }
 
-        // Asignar la imagen correspondiente
+        // Asignar la imagen correspondiente al cuerpo humano
         bodyImage.setImageResource(imageResource)
 
-        // Obtener el color de resaltado y aplicarlo al contenedor
+        // Obtener el color de resaltado y aplicarlo al cuerpo humano
         val highlightColor = when (partName) {
             "Ojos" -> R.color.highlight_eyes
             "Boca" -> R.color.highlight_mouth
@@ -91,14 +78,11 @@ class BodyDetailInfoFragment : Fragment() {
             else -> R.color.default_highlight
         }
 
-        // Aplicar el color al fondo del contenedor de la imagen
+        // Aplicar el color de resaltado al cuerpo humano
         context?.let {
             val color = ContextCompat.getColor(it, highlightColor)
-            imageContainer.setBackgroundColor(color)
+            bodyImage.setColorFilter(color, android.graphics.PorterDuff.Mode.MULTIPLY)
         }
-
-        // Proporcionar información detallada según la parte del cuerpo con formato HTML
-
 
         // Proporcionar información detallada según la parte del cuerpo con formato HTML
         val detailInfo = when (partName) {
@@ -305,25 +289,6 @@ class BodyDetailInfoFragment : Fragment() {
 
         // Aplicar formato HTML al texto
         infoText.text = Html.fromHtml(detailInfo, Html.FROM_HTML_MODE_COMPACT)
-    }
-
-    // Enum para representar las diferentes regiones del cuerpo
-    enum class BodyRegion {
-        EYES, MOUTH, BRAIN, HEART, LUNGS, STOMACH, KNEE, THIGH, FOOT
-    }
-
-    // Método para aplicar el resaltado a una región específica del cuerpo
-    private fun applyHighlightToRegion(imageView: ImageView, region: BodyRegion, highlightColor: Int) {
-        // Aquí utilizaríamos una técnica de colorización selectiva
-        // Esta es una implementación simplificada. Para una implementación real,
-        // se podría usar:
-        // 1. Un ColorMatrixColorFilter para toda la imagen
-        // 2. Un drawable compuesto que superpone un efecto de brillo en la región específica
-        // 3. Una imagen específica para cada parte seleccionada
-
-        // Para simplicidad, aplicamos un tinte sobre la imagen completa
-        // (en una implementación real, esto debería ser más selectivo)
-        imageView.setColorFilter(highlightColor, android.graphics.PorterDuff.Mode.MULTIPLY)
     }
 
     companion object {

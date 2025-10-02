@@ -12,68 +12,58 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Título de la sección -->
+        <TextView
+            android:id="@+id/detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:textColor="@color/text_primary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="El Cerebro" />
+
+        <!-- Contenido informativo -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/card_background">
 
-            <LinearLayout
-                android:id="@+id/image_container"
+            <TextView
+                android:id="@+id/detail_info_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/detail_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:contentDescription="Imagen detallada de la parte del cuerpo"
-                    android:scaleType="fitCenter" />
-
-                <TextView
-                    android:id="@+id/detail_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    tools:text="Descripción de la parte del cuerpo" />
-            </LinearLayout>
+                android:padding="20dp"
+                android:lineSpacingExtra="6dp"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                tools:text="Información detallada sobre esta parte del cuerpo." />
         </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/body_image"
+        <!-- Imagen del cuerpo humano con parte resaltada -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginBottom="16dp"
-            android:contentDescription="Imagen del cuerpo humano"
-            android:scaleType="fitCenter"
-            android:src="@drawable/human_body" />
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/surface_light">
 
-        <TextView
-            android:id="@+id/detail_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:gravity="center"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            tools:text="Título de la parte del cuerpo" />
+            <ImageView
+                android:id="@+id/body_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Imagen del cuerpo humano"
+                android:scaleType="fitCenter"
+                android:padding="16dp"
+                android:src="@drawable/human_body" />
+        </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/detail_info_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="6dp"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            tools:text="Información detallada" />
+        <!-- Eliminé completamente la imagen duplicada y los elementos relacionados -->
 
     </LinearLayout>
 </ScrollView>

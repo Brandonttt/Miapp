@@ -84,21 +84,20 @@ class BodySectionActivity : AppCompatActivity() {
 
         eyesPoint.setOnClickListener {
             navigateToDetailView("Ojos", "Órganos sensoriales responsables de la visión y percepción de luz.",
-                R.drawable.eyes_detail, it)
+                R.drawable.eyes, it) // Usar PNG directamente
         }
 
         mouthPoint.setOnClickListener {
             navigateToDetailView("Boca", "Inicio del sistema digestivo y órgano clave para la comunicación verbal.",
-                R.drawable.mouth_detail, it)
+                R.drawable.mouth, it) // Usar PNG directamente
         }
 
         brainPoint.setOnClickListener {
             navigateToDetailView("Cerebro", "Centro de control del sistema nervioso y órgano principal del pensamiento.",
-                R.drawable.brain_detail, it)
+                R.drawable.brain, it) // Usar PNG directamente
         }
     }
 
-    // Implementación de la función faltante para los puntos de interés del torso
     private fun setupTorsoPointsOfInterest(container: View) {
         val heartPoint = container.findViewById<View>(R.id.poi_heart)
         val lungsPoint = container.findViewById<View>(R.id.poi_lungs)
@@ -110,21 +109,20 @@ class BodySectionActivity : AppCompatActivity() {
 
         heartPoint.setOnClickListener {
             navigateToDetailView("Corazón", "El corazón bombea sangre a todo el cuerpo a través del sistema circulatorio.",
-                R.drawable.heart_detail, it)
+                R.drawable.heart, it) // Usar PNG directamente
         }
 
         lungsPoint.setOnClickListener {
             navigateToDetailView("Pulmones", "Los pulmones son responsables del intercambio de oxígeno y dióxido de carbono.",
-                R.drawable.lungs_detail, it)
+                R.drawable.lungs, it) // Usar PNG directamente
         }
 
         stomachPoint.setOnClickListener {
             navigateToDetailView("Estómago", "El estómago digiere los alimentos mediante ácidos y enzimas potentes.",
-                R.drawable.stomach_detail, it)
+                R.drawable.stomach, it) // Usar PNG directamente
         }
     }
 
-    // Implementación de la función faltante para los puntos de interés de las piernas
     private fun setupLegsPointsOfInterest(container: View) {
         val kneePoint = container.findViewById<View>(R.id.poi_knee)
         val thighPoint = container.findViewById<View>(R.id.poi_thigh)
@@ -136,17 +134,17 @@ class BodySectionActivity : AppCompatActivity() {
 
         kneePoint.setOnClickListener {
             navigateToDetailView("Rodilla", "La rodilla es una articulación compleja que conecta el muslo con la pierna.",
-                R.drawable.knee_detail, it)
+                R.drawable.knee, it) // Usar PNG directamente
         }
 
         thighPoint.setOnClickListener {
             navigateToDetailView("Muslo", "El muslo contiene algunos de los músculos más fuertes del cuerpo humano.",
-                R.drawable.thigh_detail, it)
+                R.drawable.thigh, it) // Usar PNG directamente
         }
 
         footPoint.setOnClickListener {
             navigateToDetailView("Pie", "Los pies soportan el peso del cuerpo y son esenciales para la locomoción.",
-                R.drawable.foot_detail, it)
+                R.drawable.foot, it) // Usar PNG directamente
         }
     }
 

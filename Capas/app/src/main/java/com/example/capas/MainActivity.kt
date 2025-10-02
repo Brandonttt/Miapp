@@ -45,17 +45,17 @@ class MainActivity : AppCompatActivity() {
 
         headRegion.setOnClickListener {
             navigateToBodySection("Cabeza", "Centro de control y procesamiento sensorial del cuerpo.",
-                R.drawable.head_detail, it)
+                R.drawable.head_detail, it) // Usar PNG directamente
         }
 
         torsoRegion.setOnClickListener {
             navigateToBodySection("Torso", "Contiene órganos vitales y sistemas esenciales para la vida.",
-                R.drawable.torso_detail, it)
+                R.drawable.torso_detail, it) // Usar PNG directamente
         }
 
         legsRegion.setOnClickListener {
             navigateToBodySection("Piernas", "Estructuras fundamentales para la locomoción y soporte.",
-                R.drawable.legs_detail, it)
+                R.drawable.legs_detail, it) // Usar PNG directamente
         }
     }
 
