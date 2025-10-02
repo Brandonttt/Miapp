@@ -1,7 +1,6 @@
 package com.example.capas
 
 import android.os.Bundle
-import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,27 +27,15 @@ class BodyPartDetailActivity : AppCompatActivity() {
         val partDescription = intent.getStringExtra("PART_DESCRIPTION") ?: ""
         val partImageId = intent.getIntExtra("PART_IMAGE", R.drawable.body_default)
 
-        // Configurar vista
-        val titleView = findViewById<TextView>(R.id.detail_title)
-        val imageView = findViewById<ImageView>(R.id.detail_image)
-        val descriptionView = findViewById<TextView>(R.id.detail_description)
-
-        titleView.text = partTitle
-        imageView.setImageResource(partImageId)
-        descriptionView.text = partDescription
-
-        // Aplicar animaciones
+        // Aplicar animaciones para la actividad principal
         val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         val slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
-
-        imageView.startAnimation(fadeIn)
-        descriptionView.startAnimation(slideUp)
 
         // Agregar fragmento de información detallada
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.detail_info_container,
-                    BodyDetailInfoFragment.newInstance(partTitle))
+                    BodyDetailInfoFragment.newInstance(partTitle, partDescription, partImageId))
                 .commit()
         }
     }

@@ -51,6 +51,9 @@ class BodySectionActivity : AppCompatActivity() {
         // Layout de puntos de interés que dependerá de la sección seleccionada
         val poiContainer = findViewById<View>(R.id.points_of_interest_container)
 
+        // Ocultar todos los puntos de interés primero
+        hideAllPointsOfInterest(poiContainer)
+
         when (sectionTitle) {
             "Cabeza" -> {
                 setupHeadPointsOfInterest(poiContainer)
@@ -62,6 +65,18 @@ class BodySectionActivity : AppCompatActivity() {
                 setupLegsPointsOfInterest(poiContainer)
             }
         }
+    }
+
+    private fun hideAllPointsOfInterest(container: View) {
+        container.findViewById<View>(R.id.poi_eyes).visibility = View.GONE
+        container.findViewById<View>(R.id.poi_mouth).visibility = View.GONE
+        container.findViewById<View>(R.id.poi_brain).visibility = View.GONE
+        container.findViewById<View>(R.id.poi_heart).visibility = View.GONE
+        container.findViewById<View>(R.id.poi_lungs).visibility = View.GONE
+        container.findViewById<View>(R.id.poi_stomach).visibility = View.GONE
+        container.findViewById<View>(R.id.poi_knee).visibility = View.GONE
+        container.findViewById<View>(R.id.poi_thigh).visibility = View.GONE
+        container.findViewById<View>(R.id.poi_foot).visibility = View.GONE
     }
 
     private fun setupHeadPointsOfInterest(container: View) {

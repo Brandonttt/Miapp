@@ -25,15 +25,17 @@
         android:id="@+id/body_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/human_body_outline"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/human_body"
         android:contentDescription="Imagen del cuerpo humano"
         app:layout_constraintBottom_toTopOf="@+id/info_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_title"
-        app:layout_constraintWidth_percent="0.7" />
+        app:layout_constraintWidth_percent="2"
+        app:layout_constraintHeight_percent="1" />
+
 
     <!-- Regiones interactivas transparentes sobre la imagen -->
     <View
@@ -60,9 +62,10 @@
         android:transitionName="shared_body_transition"
         app:layout_constraintBottom_toTopOf="@+id/legs_region"
         app:layout_constraintEnd_toEndOf="@+id/body_image"
+        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/body_image"
-        app:layout_constraintTop_toBottomOf="@+id/head_region"
-        app:layout_constraintHeight_percent="0.35" />
+        app:layout_constraintTop_toBottomOf="@+id/head_region" />
 
     <View
         android:id="@+id/legs_region"

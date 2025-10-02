@@ -7,16 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.text.Html
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 
 class BodyDetailInfoFragment : Fragment() {
 
     private var partName: String? = null
+    private var partDescription: String? = null
+    private var partImageId: Int = R.drawable.body_default
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             partName = it.getString(ARG_PART_NAME)
+            partDescription = it.getString(ARG_PART_DESC)
+            partImageId = it.getInt(ARG_PART_IMAGE, R.drawable.body_default)
         }
     }
 
@@ -33,9 +39,24 @@ class BodyDetailInfoFragment : Fragment() {
         val infoText = view.findViewById<TextView>(R.id.detail_info_text)
         val titleText = view.findViewById<TextView>(R.id.detail_title)
         val bodyImage = view.findViewById<ImageView>(R.id.body_image)
+        val detailImage = view.findViewById<ImageView>(R.id.detail_image)
+        val descriptionView = view.findViewById<TextView>(R.id.detail_description)
 
         // Establecer el título según la parte del cuerpo
         titleText.text = partName ?: "Parte del cuerpo"
+
+        // Establecer la descripción recibida
+        descriptionView.text = partDescription
+
+        // Mostrar la imagen específica de la parte
+        detailImage.setImageResource(partImageId)
+
+        // Aplicar animaciones
+        val fadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
+        val slideUp = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
+
+        detailImage.startAnimation(fadeIn)
+        descriptionView.startAnimation(slideUp)
 
         // Cambiar la imagen según la parte del cuerpo
         val imageResource = when (partName) {
@@ -46,13 +67,34 @@ class BodyDetailInfoFragment : Fragment() {
             "Pulmones" -> R.drawable.lungs
             "Estómago" -> R.drawable.stomach
             "Rodilla" -> R.drawable.knee
-            "Muslo" -> R.drawable.thigh 
+            "Muslo" -> R.drawable.thigh
             "Pie" -> R.drawable.foot
             else -> R.drawable.human_body // Imagen del cuerpo completo por defecto
         }
 
         // Asignar la imagen correspondiente
         bodyImage.setImageResource(imageResource)
+
+        // También puedes aplicar un color de resaltado adicional si deseas conservar ese efecto
+        val highlightColor = when (partName) {
+            "Ojos" -> R.color.highlight_eyes
+            "Boca" -> R.color.highlight_mouth
+            "Cerebro" -> R.color.highlight_brain
+            "Corazón" -> R.color.highlight_heart
+            "Pulmones" -> R.color.highlight_lungs
+            "Estómago" -> R.color.highlight_stomach
+            "Rodilla" -> R.color.highlight_knee
+            "Muslo" -> R.color.highlight_thigh
+            "Pie" -> R.color.highlight_foot
+            else -> R.color.default_highlight
+        }
+
+        // Si deseas aplicar un resaltado adicional a la imagen específica (opcional)
+        context?.let {
+            val highlightColorValue = ContextCompat.getColor(it, highlightColor)
+            // Si quieres aplicar un filtro de color ligero, descomenta la siguiente línea:
+            // bodyImage.setColorFilter(highlightColorValue, android.graphics.PorterDuff.Mode.MULTIPLY)
+        }
 
         // Proporcionar información detallada según la parte del cuerpo con formato HTML
         val detailInfo = when (partName) {
@@ -261,14 +303,37 @@ class BodyDetailInfoFragment : Fragment() {
         infoText.text = Html.fromHtml(detailInfo, Html.FROM_HTML_MODE_COMPACT)
     }
 
+    // Enum para representar las diferentes regiones del cuerpo
+    enum class BodyRegion {
+        EYES, MOUTH, BRAIN, HEART, LUNGS, STOMACH, KNEE, THIGH, FOOT
+    }
+
+    // Método para aplicar el resaltado a una región específica del cuerpo
+    private fun applyHighlightToRegion(imageView: ImageView, region: BodyRegion, highlightColor: Int) {
+        // Aquí utilizaríamos una técnica de colorización selectiva
+        // Esta es una implementación simplificada. Para una implementación real,
+        // se podría usar:
+        // 1. Un ColorMatrixColorFilter para toda la imagen
+        // 2. Un drawable compuesto que superpone un efecto de brillo en la región específica
+        // 3. Una imagen específica para cada parte seleccionada
+
+        // Para simplicidad, aplicamos un tinte sobre la imagen completa
+        // (en una implementación real, esto debería ser más selectivo)
+        imageView.setColorFilter(highlightColor, android.graphics.PorterDuff.Mode.MULTIPLY)
+    }
+
     companion object {
         private const val ARG_PART_NAME = "part_name"
+        private const val ARG_PART_DESC = "part_description"
+        private const val ARG_PART_IMAGE = "part_image"
 
         @JvmStatic
-        fun newInstance(partName: String) =
+        fun newInstance(partName: String, partDescription: String, partImageId: Int) =
             BodyDetailInfoFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PART_NAME, partName)
+                    putString(ARG_PART_DESC, partDescription)
+                    putInt(ARG_PART_IMAGE, partImageId)
                 }
             }
     }
