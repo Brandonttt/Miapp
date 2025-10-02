@@ -37,14 +37,17 @@
         tools:src="@drawable/head_detail" />
 
     <!-- Container para puntos de interés -->
+
     <FrameLayout
         android:id="@+id/points_of_interest_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/section_image"
         app:layout_constraintEnd_toEndOf="@+id/section_image"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/section_image"
-        app:layout_constraintTop_toTopOf="@+id/section_image">
+        app:layout_constraintTop_toTopOf="@+id/section_image"
+        app:layout_constraintVertical_bias="1.0">
 
         <!-- Puntos de interés para la cabeza -->
         <View

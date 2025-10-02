@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.text.Html
+import android.widget.ImageView
 
 class BodyDetailInfoFragment : Fragment() {
 
@@ -30,6 +31,28 @@ class BodyDetailInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val infoText = view.findViewById<TextView>(R.id.detail_info_text)
+        val titleText = view.findViewById<TextView>(R.id.detail_title)
+        val bodyImage = view.findViewById<ImageView>(R.id.body_image)
+
+        // Establecer el título según la parte del cuerpo
+        titleText.text = partName ?: "Parte del cuerpo"
+
+        // Cambiar la imagen según la parte del cuerpo
+        val imageResource = when (partName) {
+            "Ojos" -> R.drawable.eyes
+            "Boca" -> R.drawable.mouth
+            "Cerebro" -> R.drawable.brain
+            "Corazón" -> R.drawable.heart
+            "Pulmones" -> R.drawable.lungs
+            "Estómago" -> R.drawable.stomach
+            "Rodilla" -> R.drawable.knee
+            "Muslo" -> R.drawable.thigh 
+            "Pie" -> R.drawable.foot
+            else -> R.drawable.human_body // Imagen del cuerpo completo por defecto
+        }
+
+        // Asignar la imagen correspondiente
+        bodyImage.setImageResource(imageResource)
 
         // Proporcionar información detallada según la parte del cuerpo con formato HTML
         val detailInfo = when (partName) {
@@ -208,7 +231,30 @@ class BodyDetailInfoFragment : Fragment() {
                 </ul>
                 <p>Durante un día normal de caminata, los pies soportan una fuerza acumulada equivalente a cientos de toneladas, demostrando su increíble resistencia.</p>
             """
-            else -> "<h3>Información detallada no disponible.</h3><p>Esta parte del cuerpo aún no tiene información detallada en nuestra base de datos.</p>"
+            else -> """
+                <h3>El Cuerpo Humano: Una máquina perfecta</h3>
+                <p>El cuerpo humano es una obra maestra de la naturaleza compuesta por aproximadamente 37 billones de células organizadas en tejidos, órganos y sistemas:</p>
+                <ul>
+                    <li><b>Sistemas principales:</b>
+                        <ul>
+                            <li><b>Sistema nervioso:</b> Centro de control dirigido por el cerebro</li>
+                            <li><b>Sistema circulatorio:</b> Transporte de nutrientes y oxígeno liderado por el corazón</li>
+                            <li><b>Sistema respiratorio:</b> Intercambio de gases a través de los pulmones</li>
+                            <li><b>Sistema digestivo:</b> Procesamiento de alimentos desde la boca hasta el intestino</li>
+                            <li><b>Sistema muscular:</b> Más de 600 músculos que permiten el movimiento</li>
+                            <li><b>Sistema esquelético:</b> 206 huesos que proporcionan estructura y protección</li>
+                        </ul>
+                    </li>
+                    <li><b>Datos fascinantes:</b>
+                        <ul>
+                            <li>El ADN humano estirado mediría 2 veces la distancia de la Tierra al Sol y vuelta</li>
+                            <li>Producimos aproximadamente 50,000 pensamientos cada día</li>
+                            <li>El intestino delgado mide entre 6-7 metros de longitud</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Selecciona una parte específica del cuerpo para obtener información más detallada.</p>
+            """
         }
 
         // Aplicar formato HTML al texto
