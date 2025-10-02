@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import android.widget.Button
+import android.view.animation.AnimationUtils
 
 class BodySectionActivity : AppCompatActivity() {
 
@@ -32,8 +34,15 @@ class BodySectionActivity : AppCompatActivity() {
         val sectionImageId = intent.getIntExtra("SECTION_IMAGE", R.drawable.body_default)
 
         // Configurar vista
-        findViewById<TextView>(R.id.section_title).text = sectionTitle
-        findViewById<ImageView>(R.id.section_image).setImageResource(sectionImageId)
+        val titleView = findViewById<TextView>(R.id.section_title)
+        titleView.text = sectionTitle
+
+        val imageView = findViewById<ImageView>(R.id.section_image)
+        imageView.setImageResource(sectionImageId)
+
+        // Aplicar animación de fade in a la imagen
+        val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        imageView.startAnimation(fadeIn)
 
         // Agregar fragmento de información
         if (savedInstanceState == null) {
@@ -51,9 +60,6 @@ class BodySectionActivity : AppCompatActivity() {
         // Layout de puntos de interés que dependerá de la sección seleccionada
         val poiContainer = findViewById<View>(R.id.points_of_interest_container)
 
-        // Ocultar todos los puntos de interés primero
-        hideAllPointsOfInterest(poiContainer)
-
         when (sectionTitle) {
             "Cabeza" -> {
                 setupHeadPointsOfInterest(poiContainer)
@@ -67,18 +73,6 @@ class BodySectionActivity : AppCompatActivity() {
         }
     }
 
-    private fun hideAllPointsOfInterest(container: View) {
-        container.findViewById<View>(R.id.poi_eyes).visibility = View.GONE
-        container.findViewById<View>(R.id.poi_mouth).visibility = View.GONE
-        container.findViewById<View>(R.id.poi_brain).visibility = View.GONE
-        container.findViewById<View>(R.id.poi_heart).visibility = View.GONE
-        container.findViewById<View>(R.id.poi_lungs).visibility = View.GONE
-        container.findViewById<View>(R.id.poi_stomach).visibility = View.GONE
-        container.findViewById<View>(R.id.poi_knee).visibility = View.GONE
-        container.findViewById<View>(R.id.poi_thigh).visibility = View.GONE
-        container.findViewById<View>(R.id.poi_foot).visibility = View.GONE
-    }
-
     private fun setupHeadPointsOfInterest(container: View) {
         val eyesPoint = container.findViewById<View>(R.id.poi_eyes)
         val mouthPoint = container.findViewById<View>(R.id.poi_mouth)
@@ -89,21 +83,22 @@ class BodySectionActivity : AppCompatActivity() {
         brainPoint.visibility = View.VISIBLE
 
         eyesPoint.setOnClickListener {
-            navigateToDetailView("Ojos", "Los ojos son órganos sensoriales que permiten la visión.",
+            navigateToDetailView("Ojos", "Órganos sensoriales responsables de la visión y percepción de luz.",
                 R.drawable.eyes_detail, it)
         }
 
         mouthPoint.setOnClickListener {
-            navigateToDetailView("Boca", "La boca permite ingerir alimentos y comunicación verbal.",
+            navigateToDetailView("Boca", "Inicio del sistema digestivo y órgano clave para la comunicación verbal.",
                 R.drawable.mouth_detail, it)
         }
 
         brainPoint.setOnClickListener {
-            navigateToDetailView("Cerebro", "El cerebro es el centro de control del sistema nervioso.",
+            navigateToDetailView("Cerebro", "Centro de control del sistema nervioso y órgano principal del pensamiento.",
                 R.drawable.brain_detail, it)
         }
     }
 
+    // Implementación de la función faltante para los puntos de interés del torso
     private fun setupTorsoPointsOfInterest(container: View) {
         val heartPoint = container.findViewById<View>(R.id.poi_heart)
         val lungsPoint = container.findViewById<View>(R.id.poi_lungs)
@@ -114,21 +109,22 @@ class BodySectionActivity : AppCompatActivity() {
         stomachPoint.visibility = View.VISIBLE
 
         heartPoint.setOnClickListener {
-            navigateToDetailView("Corazón", "El corazón bombea sangre a través del sistema circulatorio.",
+            navigateToDetailView("Corazón", "El corazón bombea sangre a todo el cuerpo a través del sistema circulatorio.",
                 R.drawable.heart_detail, it)
         }
 
         lungsPoint.setOnClickListener {
-            navigateToDetailView("Pulmones", "Los pulmones son responsables del intercambio de gases en la respiración.",
+            navigateToDetailView("Pulmones", "Los pulmones son responsables del intercambio de oxígeno y dióxido de carbono.",
                 R.drawable.lungs_detail, it)
         }
 
         stomachPoint.setOnClickListener {
-            navigateToDetailView("Estómago", "El estómago es parte del sistema digestivo.",
+            navigateToDetailView("Estómago", "El estómago digiere los alimentos mediante ácidos y enzimas potentes.",
                 R.drawable.stomach_detail, it)
         }
     }
 
+    // Implementación de la función faltante para los puntos de interés de las piernas
     private fun setupLegsPointsOfInterest(container: View) {
         val kneePoint = container.findViewById<View>(R.id.poi_knee)
         val thighPoint = container.findViewById<View>(R.id.poi_thigh)
@@ -139,29 +135,29 @@ class BodySectionActivity : AppCompatActivity() {
         footPoint.visibility = View.VISIBLE
 
         kneePoint.setOnClickListener {
-            navigateToDetailView("Rodilla", "La rodilla es una articulación compleja que permite la flexión de la pierna.",
+            navigateToDetailView("Rodilla", "La rodilla es una articulación compleja que conecta el muslo con la pierna.",
                 R.drawable.knee_detail, it)
         }
 
         thighPoint.setOnClickListener {
-            navigateToDetailView("Muslo", "El muslo contiene los músculos más grandes del cuerpo.",
+            navigateToDetailView("Muslo", "El muslo contiene algunos de los músculos más fuertes del cuerpo humano.",
                 R.drawable.thigh_detail, it)
         }
 
         footPoint.setOnClickListener {
-            navigateToDetailView("Pie", "El pie es la base de apoyo para la bipedación humana.",
+            navigateToDetailView("Pie", "Los pies soportan el peso del cuerpo y son esenciales para la locomoción.",
                 R.drawable.foot_detail, it)
         }
     }
 
-    private fun navigateToDetailView(title: String, description: String, imageResId: Int, view: View) {
+    private fun navigateToDetailView(partTitle: String, partDescription: String, imageResId: Int, view: View) {
         val intent = Intent(this, BodyPartDetailActivity::class.java).apply {
-            putExtra("PART_TITLE", title)
-            putExtra("PART_DESCRIPTION", description)
+            putExtra("PART_TITLE", partTitle)
+            putExtra("PART_DESCRIPTION", partDescription)
             putExtra("PART_IMAGE", imageResId)
         }
 
-        // Crear una transición animada
+        // Transición animada
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
             this,
             view,

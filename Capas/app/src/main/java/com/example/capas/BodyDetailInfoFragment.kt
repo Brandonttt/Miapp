@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.text.Html
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 
 class BodyDetailInfoFragment : Fragment() {
@@ -41,6 +42,7 @@ class BodyDetailInfoFragment : Fragment() {
         val bodyImage = view.findViewById<ImageView>(R.id.body_image)
         val detailImage = view.findViewById<ImageView>(R.id.detail_image)
         val descriptionView = view.findViewById<TextView>(R.id.detail_description)
+        val imageContainer = view.findViewById<LinearLayout>(R.id.image_container)
 
         // Establecer el título según la parte del cuerpo
         titleText.text = partName ?: "Parte del cuerpo"
@@ -75,7 +77,7 @@ class BodyDetailInfoFragment : Fragment() {
         // Asignar la imagen correspondiente
         bodyImage.setImageResource(imageResource)
 
-        // También puedes aplicar un color de resaltado adicional si deseas conservar ese efecto
+        // Obtener el color de resaltado y aplicarlo al contenedor
         val highlightColor = when (partName) {
             "Ojos" -> R.color.highlight_eyes
             "Boca" -> R.color.highlight_mouth
@@ -89,12 +91,14 @@ class BodyDetailInfoFragment : Fragment() {
             else -> R.color.default_highlight
         }
 
-        // Si deseas aplicar un resaltado adicional a la imagen específica (opcional)
+        // Aplicar el color al fondo del contenedor de la imagen
         context?.let {
-            val highlightColorValue = ContextCompat.getColor(it, highlightColor)
-            // Si quieres aplicar un filtro de color ligero, descomenta la siguiente línea:
-            // bodyImage.setColorFilter(highlightColorValue, android.graphics.PorterDuff.Mode.MULTIPLY)
+            val color = ContextCompat.getColor(it, highlightColor)
+            imageContainer.setBackgroundColor(color)
         }
+
+        // Proporcionar información detallada según la parte del cuerpo con formato HTML
+
 
         // Proporcionar información detallada según la parte del cuerpo con formato HTML
         val detailInfo = when (partName) {

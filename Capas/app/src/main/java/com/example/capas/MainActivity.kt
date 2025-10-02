@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         // Agregar fragmento de información
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.info_container, BodyInfoFragment.newInstance("Cuerpo Humano",
-                    "Toca una región del cuerpo para explorar más detalles"))
+                .replace(R.id.info_container, BodyInfoFragment.newInstance("Sistema del Cuerpo Humano",
+                    "Toca una región del cuerpo para explorar sus funciones y componentes"))
                 .commit()
         }
 
@@ -44,17 +44,17 @@ class MainActivity : AppCompatActivity() {
         val legsRegion = findViewById<View>(R.id.legs_region)
 
         headRegion.setOnClickListener {
-            navigateToBodySection("Cabeza", "La cabeza contiene el cerebro y órganos sensoriales principales.",
+            navigateToBodySection("Cabeza", "Centro de control y procesamiento sensorial del cuerpo.",
                 R.drawable.head_detail, it)
         }
 
         torsoRegion.setOnClickListener {
-            navigateToBodySection("Torso", "El torso alberga órganos vitales como el corazón y pulmones.",
+            navigateToBodySection("Torso", "Contiene órganos vitales y sistemas esenciales para la vida.",
                 R.drawable.torso_detail, it)
         }
 
         legsRegion.setOnClickListener {
-            navigateToBodySection("Piernas", "Las piernas permiten la locomoción y soportan el peso corporal.",
+            navigateToBodySection("Piernas", "Estructuras fundamentales para la locomoción y soporte.",
                 R.drawable.legs_detail, it)
         }
     }
@@ -66,12 +66,15 @@ class MainActivity : AppCompatActivity() {
             putExtra("SECTION_IMAGE", imageResId)
         }
 
-        // Crear una transición animada
+        // Crear una transición animada mejorada
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
             this,
             view,
             "shared_body_transition"
         )
+
+        // Mostrar un mensaje toast indicando la sección seleccionada
+        Toast.makeText(this, "Explorando: $title", Toast.LENGTH_SHORT).show()
 
         startActivity(intent, options.toBundle())
     }
