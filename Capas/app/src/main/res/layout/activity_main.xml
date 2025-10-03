@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/body_background"
+    android:background="?android:attr/colorBackground"
     tools:context=".MainActivity">
 
-    <!-- Header mejorado -->
+    <!-- Header mejorado con Switch -->
     <LinearLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
@@ -18,26 +18,70 @@
         android:background="@color/purple_500"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/main_title"
+        <!-- Container para título y switch -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Explorador del Cuerpo Humano"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_white"
-            android:gravity="center"
-            android:layout_marginTop="16dp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/subtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descubre los secretos de la anatomía humana"
-            android:textSize="16sp"
-            android:textColor="#E8E8E8"
-            android:gravity="center"
-            android:layout_marginTop="8dp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/main_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Explorador del Cuerpo Humano"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_white" />
+
+                <TextView
+                    android:id="@+id/subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Descubre los secretos de la anatomía humana"
+                    android:textSize="16sp"
+                    android:textColor="#E8E8E8"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Switch para cambiar tema -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌙"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="4dp" />
+
+                <Switch
+                    android:id="@+id/theme_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumbTint="@color/white"
+                    android:trackTint="@color/purple_700" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tema"
+                    android:textSize="12sp"
+                    android:textColor="#E8E8E8"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Contenedor principal con diseño de tarjeta -->
@@ -48,7 +92,7 @@
         android:layout_margin="16dp"
         app:cardCornerRadius="24dp"
         app:cardElevation="12dp"
-        app:cardBackgroundColor="@color/card_background"
+        app:cardBackgroundColor="@color/card_background_light"
         app:layout_constraintTop_toBottomOf="@+id/header_container"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +111,7 @@
                 android:layout_margin="8dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/surface_light"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/info_container"
                 app:layout_constraintStart_toStartOf="parent"

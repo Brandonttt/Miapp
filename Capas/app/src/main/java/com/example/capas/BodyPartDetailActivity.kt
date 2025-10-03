@@ -13,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat
 
 class BodyPartDetailActivity : AppCompatActivity() {
 
+    private val themeManager = ThemeManager.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,6 +26,9 @@ class BodyPartDetailActivity : AppCompatActivity() {
             insets
         }
 
+        // Aplicar tema inicial
+        applyCurrentTheme()
+
         // Recibir datos del intent
         val partTitle = intent.getStringExtra("PART_TITLE") ?: "Parte del Cuerpo"
         val partDescription = intent.getStringExtra("PART_DESCRIPTION") ?: ""
@@ -31,21 +36,19 @@ class BodyPartDetailActivity : AppCompatActivity() {
 
         // Configurar vista
         val titleView = findViewById<TextView>(R.id.detail_title)
-        val imageView = findViewById<ImageView>(R.id.detail_image)
-        val descriptionView = findViewById<TextView>(R.id.detail_description)
-
         titleView.text = partTitle
-        imageView.setImageResource(partImageId)
+
+        val descriptionView = findViewById<TextView>(R.id.detail_description)
         descriptionView.text = partDescription
 
-        // Aplicar animaciones mejoradas
+        val imageView = findViewById<ImageView>(R.id.detail_image)
+        imageView.setImageResource(partImageId)
+
+        // Aplicar animaciones
         val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        val slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
-
         imageView.startAnimation(fadeIn)
-        descriptionView.startAnimation(slideUp)
 
-        // Agregar fragmento de información detallada con todos los parámetros necesarios
+        // Agregar fragmento de información detallada
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.detail_info_container,
@@ -53,24 +56,25 @@ class BodyPartDetailActivity : AppCompatActivity() {
                 .commit()
         }
 
-        // Configurar botón para volver
-        findViewById<Button>(R.id.back_to_section_button)?.setOnClickListener {
-            onBackPressed()
-        }
-
-        // Configurar botón para compartir información
-        findViewById<Button>(R.id.share_button)?.setOnClickListener {
-            sharePartInfo(partTitle, partDescription)
-        }
+        // Configurar botones
+        setupButtons()
     }
 
-    private fun sharePartInfo(title: String, description: String) {
-        val shareIntent = android.content.Intent().apply {
-            action = android.content.Intent.ACTION_SEND
-            putExtra(android.content.Intent.EXTRA_SUBJECT, "Información sobre: $title")
-            putExtra(android.content.Intent.EXTRA_TEXT, "$title: $description")
-            type = "text/plain"
+    private fun applyCurrentTheme() {
+        val rootView = findViewById<View>(R.id.detail_container)
+        themeManager.applyThemeToView(this, rootView)
+    }
+
+    private fun setupButtons() {
+        val backButton = findViewById<Button>(R.id.back_to_section_button)
+        val shareButton = findViewById<Button>(R.id.share_button)
+
+        backButton?.setOnClickListener {
+            finish()
         }
-        startActivity(android.content.Intent.createChooser(shareIntent, "Compartir información"))
+
+        shareButton?.setOnClickListener {
+            // Implementar funcionalidad de compartir
+        }
     }
 }

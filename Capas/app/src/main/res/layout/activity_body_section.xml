@@ -5,21 +5,63 @@
     android:id="@+id/section_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/section_background"
+    android:background="?android:attr/colorBackground"
     tools:context=".BodySectionActivity">
 
-    <TextView
-        android:id="@+id/section_title"
-        android:layout_width="wrap_content"
+    <!-- Header con título y switch -->
+    <LinearLayout
+        android:id="@+id/section_header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Cabeza" />
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/purple_500"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/section_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_white"
+            android:layout_marginTop="16dp"
+            tools:text="Cabeza" />
+
+        <!-- Switch para cambiar tema -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🌙"
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp" />
+
+            <Switch
+                android:id="@+id/theme_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:thumbTint="@color/white"
+                android:trackTint="@color/purple_700" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tema"
+                android:textSize="10sp"
+                android:textColor="@color/text_white"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/section_image"
@@ -33,7 +75,7 @@
         app:layout_constraintBottom_toTopOf="@+id/section_info_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section_title"
+        app:layout_constraintTop_toBottomOf="@+id/section_header"
         app:layout_constraintWidth_percent="0.9"
         tools:src="@drawable/head_detail" />
 
