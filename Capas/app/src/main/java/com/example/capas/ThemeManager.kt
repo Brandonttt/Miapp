@@ -1,83 +1,51 @@
 package com.example.capas
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatDelegate
-import android.util.Log
 
+/**
+ * ThemeManager: Aplica manualmente Theme.Capas.Light u .Dark
+ * antes de setContentView() en cada Activity.
+ */
 class ThemeManager private constructor() {
 
     companion object {
-        private const val PREFS_NAME = "theme_preferences"
-        private const val KEY_IS_DARK_MODE = "is_dark_mode_enabled"
-        private const val TAG = "ThemeManager"
+        private const val PREFS = "theme_prefs_manual"
+        private const val KEY_DARK = "dark_enabled"
 
-        @Volatile
-        private var INSTANCE: ThemeManager? = null
+        @Volatile private var INSTANCE: ThemeManager? = null
 
-        fun getInstance(): ThemeManager {
-            return INSTANCE ?: synchronized(this) {
+        fun getInstance(): ThemeManager =
+            INSTANCE ?: synchronized(this) {
                 INSTANCE ?: ThemeManager().also { INSTANCE = it }
             }
-        }
     }
 
-    private fun getSharedPreferences(context: Context): SharedPreferences {
-        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private fun prefs(ctx: Context): SharedPreferences =
+        ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+
+    fun isDarkModeEnabled(ctx: Context): Boolean =
+        prefs(ctx).getBoolean(KEY_DARK, false)
+
+    /**
+     * Debe llamarse ANTES de setContentView() en cada Activity.
+     */
+    fun applyTheme(activity: Activity) {
+        val dark = isDarkModeEnabled(activity)
+        activity.setTheme(
+            if (dark) R.style.Theme_Capas_Dark
+            else R.style.Theme_Capas_Light
+        )
     }
 
     /**
-     * Verifica si el modo oscuro está habilitado
+     * Cambia la preferencia y devuelve true si cambió.
      */
-    fun isDarkModeEnabled(context: Context): Boolean {
-        val isDark = getSharedPreferences(context).getBoolean(KEY_IS_DARK_MODE, false)
-        Log.d(TAG, "isDarkModeEnabled: $isDark")
-        return isDark
-    }
-
-    /**
-     * Guarda la preferencia de modo oscuro y aplica el tema inmediatamente
-     */
-    fun setDarkModeEnabled(context: Context, enabled: Boolean) {
-        Log.d(TAG, "setDarkModeEnabled: $enabled")
-
-        // Guardar la preferencia
-        getSharedPreferences(context)
-            .edit()
-            .putBoolean(KEY_IS_DARK_MODE, enabled)
-            .commit()
-
-        // Aplicar el tema inmediatamente usando AppCompatDelegate
-        applyThemeGlobally(enabled)
-    }
-
-    /**
-     * Aplica el tema globalmente usando AppCompatDelegate
-     */
-    private fun applyThemeGlobally(isDarkMode: Boolean) {
-        if (isDarkMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            Log.d(TAG, "Applied DARK theme globally")
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            Log.d(TAG, "Applied LIGHT theme globally")
-        }
-    }
-
-    /**
-     * Inicializa el tema al arrancar la aplicación
-     */
-    fun initializeTheme(context: Context) {
-        val isDarkMode = isDarkModeEnabled(context)
-        Log.d(TAG, "initializeTheme: $isDarkMode")
-        applyThemeGlobally(isDarkMode)
-    }
-
-    /**
-     * Cambia el tema (para uso con el switch)
-     */
-    fun toggleTheme(context: Context, newState: Boolean) {
-        Log.d(TAG, "toggleTheme to: $newState")
-        setDarkModeEnabled(context, newState)
+    fun setDarkModeEnabled(ctx: Context, enable: Boolean): Boolean {
+        val current = isDarkModeEnabled(ctx)
+        if (current == enable) return false
+        prefs(ctx).edit().putBoolean(KEY_DARK, enable).apply()
+        return true
     }
 }

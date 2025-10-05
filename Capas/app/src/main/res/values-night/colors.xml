@@ -14,19 +14,19 @@
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
 
-    <!-- TEMA OSCURO - Colores para modo noche -->
-    <color name="background_light">#121212</color>
-    <color name="surface_light">#1E1E1E</color>
-    <color name="card_background_light">#2D2D2D</color>
-    <color name="text_primary_light">#FFFFFF</color>
-    <color name="text_secondary_light">#B3B3B3</color>
-
     <!-- Colores explícitos para tema oscuro -->
     <color name="background_dark">#121212</color>
     <color name="surface_dark">#1E1E1E</color>
     <color name="card_background_dark">#2D2D2D</color>
     <color name="text_primary_dark">#FFFFFF</color>
     <color name="text_secondary_dark">#B3B3B3</color>
+
+    <!-- Colores para modo oscuro -->
+    <color name="background_light">@color/background_dark</color>
+    <color name="surface_light">@color/surface_dark</color>
+    <color name="card_background_light">@color/card_background_dark</color>
+    <color name="text_primary_light">@color/text_primary_dark</color>
+    <color name="text_secondary_light">@color/text_secondary_dark</color>
 
     <!-- Colores de texto para modo oscuro -->
     <color name="text_white">#FFFFFFFF</color>

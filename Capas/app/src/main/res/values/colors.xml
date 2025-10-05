@@ -1,50 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Colores base de la aplicación -->
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <!-- Paleta Light -->
+    <color name="colorPrimaryLight">#6200EE</color>
+    <color name="colorPrimaryLightVariant">#3700B3</color>
+    <color name="colorSecondaryLight">#03DAC5</color>
+    <color name="colorBackgroundLight">#FFFFFF</color>
+    <color name="colorSurfaceLight">#F5F5F7</color>
+    <color name="textPrimaryLight">#212121</color>
+    <color name="textSecondaryLight">#757575</color>
 
-    <!-- Colores básicos -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="purple_500">#6200EE</color>
-    <color name="purple_700">#3700B3</color>
-    <color name="purple_200">#BB86FC</color>
-    <color name="teal_200">#03DAC5</color>
-    <color name="teal_700">#018786</color>
+    <!-- Paleta Dark -->
+    <color name="colorPrimaryDark">#BB86FC</color>
+    <color name="colorPrimaryDarkVariant">#985EFF</color>
+    <color name="colorSecondaryDark">#03DAC5</color>
+    <color name="colorBackgroundDark">#121212</color>
+    <color name="colorSurfaceDark">#1E1E1E</color>
+    <color name="textPrimaryDark">#FFFFFF</color>
+    <color name="textSecondaryDark">#B3B3B3</color>
 
-    <!-- TEMA CLARO - Colores para modo día -->
-    <color name="background_light">#FFFFFF</color>
-    <color name="surface_light">#F8F9FA</color>
-    <color name="card_background_light">#FFFFFF</color>
-    <color name="text_primary_light">#212121</color>
-    <color name="text_secondary_light">#757575</color>
-
-    <!-- TEMA OSCURO - Para referencia (se sobreescriben en values-night) -->
-    <color name="background_dark">#121212</color>
-    <color name="surface_dark">#1E1E1E</color>
-    <color name="card_background_dark">#2D2D2D</color>
-    <color name="text_primary_dark">#FFFFFF</color>
-    <color name="text_secondary_dark">#B3B3B3</color>
-
-    <!-- Colores de texto (FALTANTES - AGREGADOS) -->
-    <color name="text_white">#FFFFFFFF</color>
-    <color name="text_primary">@color/text_primary_light</color>
-    <color name="text_secondary">@color/text_secondary_light</color>
-
-    <!-- Colores de superficie por defecto -->
-    <color name="card_background">@color/card_background_light</color>
-
-    <!-- Colores de resaltado para partes del cuerpo -->
-    <color name="highlight_eyes">#80FF5722</color>
-    <color name="highlight_mouth">#80E91E63</color>
-    <color name="highlight_brain">#80673AB7</color>
-    <color name="highlight_heart">#80F44336</color>
-    <color name="highlight_lungs">#8003A9F4</color>
-    <color name="highlight_stomach">#80009688</color>
-    <color name="highlight_knee">#80FFC107</color>
-    <color name="highlight_thigh">#804CAF50</color>
-    <color name="highlight_foot">#80795548</color>
-    <color name="default_highlight">#00000000</color>
+    <!-- Comunes -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>

@@ -3,168 +3,113 @@ package com.example.capas
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Switch
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import android.view.animation.AnimationUtils
-import android.util.Log
 
 class BodySectionActivity : AppCompatActivity() {
 
-    private lateinit var sectionTitle: String
     private val themeManager = ThemeManager.getInstance()
-    private val TAG = "BodySectionActivity"
+    private lateinit var sectionTitle: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Aplicar tema aquí también
+        themeManager.applyTheme(this)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_body_section)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.section_container)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(bars.left, bars.top, bars.right, bars.bottom)
             insets
         }
 
-        // Recibir datos del intent
-        sectionTitle = intent.getStringExtra("SECTION_TITLE") ?: "Sección del Cuerpo"
-        val sectionDescription = intent.getStringExtra("SECTION_DESCRIPTION") ?: ""
-        val sectionImageId = intent.getIntExtra("SECTION_IMAGE", R.drawable.body_default)
+        sectionTitle = intent.getStringExtra("SECTION_TITLE") ?: "Sección"
+        val desc = intent.getStringExtra("SECTION_DESCRIPTION") ?: ""
+        val imgRes = intent.getIntExtra("SECTION_IMAGE", R.drawable.body_default)
 
-        // Configurar vista
-        val titleView = findViewById<TextView>(R.id.section_title)
-        titleView.text = sectionTitle
+        findViewById<TextView>(R.id.section_title).text = sectionTitle
+        findViewById<ImageView>(R.id.section_image).apply {
+            setImageResource(imgRes)
+            startAnimation(AnimationUtils.loadAnimation(this@BodySectionActivity, R.anim.fade_in))
+        }
 
-        val imageView = findViewById<ImageView>(R.id.section_image)
-        imageView.setImageResource(sectionImageId)
-
-        // Aplicar animación de fade in a la imagen
-        val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        imageView.startAnimation(fadeIn)
-
-        // Configurar el switch de tema
         setupThemeSwitch()
 
-        // Agregar fragmento de información
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.section_info_container,
-                    BodyInfoFragment.newInstance(sectionTitle, sectionDescription))
+                .replace(
+                    R.id.section_info_container,
+                    BodyInfoFragment.newInstance(sectionTitle, desc),
+                    "INFO_SECTION"
+                )
                 .commit()
         }
 
-        // Configurar puntos de interés según la sección
         setupPointsOfInterest()
     }
 
     private fun setupThemeSwitch() {
-        val themeSwitch = findViewById<Switch>(R.id.theme_switch)
-
-        // Establecer estado inicial del switch
-        val isDarkMode = themeManager.isDarkModeEnabled(this)
-        themeSwitch.isChecked = isDarkMode
-        Log.d(TAG, "Switch initialized: $isDarkMode")
-
-        // Configurar listener del switch
-        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            Log.d(TAG, "Switch changed to: $isChecked")
-            // 1. Cambiar el tema a través del ThemeManager
-            themeManager.toggleTheme(this, isChecked)
-
-            // 2. IMPORTANTE: Reiniciar la actividad para aplicar el nuevo tema inmediatamente
-            recreate()
+        val sw = findViewById<Switch>(R.id.theme_switch)
+        sw.setOnCheckedChangeListener(null)
+        sw.isChecked = themeManager.isDarkModeEnabled(this)
+        sw.setOnCheckedChangeListener { _, checked ->
+            val changed = themeManager.setDarkModeEnabled(this, checked)
+            if (changed) recreate()
         }
     }
 
     private fun setupPointsOfInterest() {
-        val poiContainer = findViewById<View>(R.id.points_of_interest_container)
-
+        val p = findViewById<View>(R.id.points_of_interest_container)
         when (sectionTitle) {
-            "Cabeza" -> setupHeadPointsOfInterest(poiContainer)
-            "Torso" -> setupTorsoPointsOfInterest(poiContainer)
-            "Piernas" -> setupLegsPointsOfInterest(poiContainer)
+            "Cabeza" -> head(p)
+            "Torso" -> torso(p)
+            "Piernas" -> legs(p)
         }
     }
 
-    private fun setupHeadPointsOfInterest(container: View) {
-        val eyesPoint = container.findViewById<View>(R.id.poi_eyes)
-        val mouthPoint = container.findViewById<View>(R.id.poi_mouth)
-        val brainPoint = container.findViewById<View>(R.id.poi_brain)
+    private fun head(p: View) {
+        p.findViewById<View>(R.id.poi_eyes)?.activate("Ojos", "Órganos de la visión.", R.drawable.eyes)
+        p.findViewById<View>(R.id.poi_mouth)?.activate("Boca", "Inicio del sistema digestivo.", R.drawable.mouth)
+        p.findViewById<View>(R.id.poi_brain)?.activate("Cerebro", "Centro de control nervioso.", R.drawable.brain)
+    }
 
-        eyesPoint?.visibility = View.VISIBLE
-        mouthPoint?.visibility = View.VISIBLE
-        brainPoint?.visibility = View.VISIBLE
+    private fun torso(p: View) {
+        p.findViewById<View>(R.id.poi_heart)?.activate("Corazón", "Bombea sangre.", R.drawable.heart)
+        p.findViewById<View>(R.id.poi_lungs)?.activate("Pulmones", "Intercambio gaseoso.", R.drawable.lungs)
+        p.findViewById<View>(R.id.poi_stomach)?.activate("Estómago", "Digestión inicial.", R.drawable.stomach)
+    }
 
-        eyesPoint?.setOnClickListener {
-            navigateToDetailView("Ojos", "Órganos sensoriales responsables de la visión y percepción de luz.", R.drawable.eyes, it)
-        }
+    private fun legs(p: View) {
+        p.findViewById<View>(R.id.poi_knee)?.activate("Rodilla", "Articulación compleja.", R.drawable.knee)
+        p.findViewById<View>(R.id.poi_thigh)?.activate("Muslo", "Músculos potentes.", R.drawable.thigh)
+        p.findViewById<View>(R.id.poi_foot)?.activate("Pie", "Soporte y locomoción.", R.drawable.foot)
+    }
 
-        mouthPoint?.setOnClickListener {
-            navigateToDetailView("Boca", "Inicio del sistema digestivo y órgano clave para la comunicación verbal.", R.drawable.mouth, it)
-        }
-
-        brainPoint?.setOnClickListener {
-            navigateToDetailView("Cerebro", "Centro de control del sistema nervioso y órgano principal del pensamiento.", R.drawable.brain, it)
+    private fun View.activate(title: String, desc: String, img: Int) {
+        visibility = View.VISIBLE
+        setOnClickListener {
+            openDetail(title, desc, img, it)
         }
     }
 
-    private fun setupTorsoPointsOfInterest(container: View) {
-        val heartPoint = container.findViewById<View>(R.id.poi_heart)
-        val lungsPoint = container.findViewById<View>(R.id.poi_lungs)
-        val stomachPoint = container.findViewById<View>(R.id.poi_stomach)
-
-        heartPoint?.visibility = View.VISIBLE
-        lungsPoint?.visibility = View.VISIBLE
-        stomachPoint?.visibility = View.VISIBLE
-
-        heartPoint?.setOnClickListener {
-            navigateToDetailView("Corazón", "El corazón bombea sangre a todo el cuerpo a través del sistema circulatorio.", R.drawable.heart, it)
-        }
-
-        lungsPoint?.setOnClickListener {
-            navigateToDetailView("Pulmones", "Los pulmones son responsables del intercambio de oxígeno y dióxido de carbono.", R.drawable.lungs, it)
-        }
-
-        stomachPoint?.setOnClickListener {
-            navigateToDetailView("Estómago", "El estómago digiere los alimentos mediante ácidos y enzimas potentes.", R.drawable.stomach, it)
-        }
-    }
-
-    private fun setupLegsPointsOfInterest(container: View) {
-        val kneePoint = container.findViewById<View>(R.id.poi_knee)
-        val thighPoint = container.findViewById<View>(R.id.poi_thigh)
-        val footPoint = container.findViewById<View>(R.id.poi_foot)
-
-        kneePoint?.visibility = View.VISIBLE
-        thighPoint?.visibility = View.VISIBLE
-        footPoint?.visibility = View.VISIBLE
-
-        kneePoint?.setOnClickListener {
-            navigateToDetailView("Rodilla", "La rodilla es una articulación compleja que conecta el muslo con la pierna.", R.drawable.knee, it)
-        }
-
-        thighPoint?.setOnClickListener {
-            navigateToDetailView("Muslo", "El muslo contiene algunos de los músculos más fuertes del cuerpo humano.", R.drawable.thigh, it)
-        }
-
-        footPoint?.setOnClickListener {
-            navigateToDetailView("Pie", "Los pies soportan el peso del cuerpo y son esenciales para la locomoción.", R.drawable.foot, it)
-        }
-    }
-
-    private fun navigateToDetailView(partTitle: String, partDescription: String, imageResId: Int, view: View) {
+    private fun openDetail(title: String, desc: String, img: Int, shared: View) {
         val intent = Intent(this, BodyPartDetailActivity::class.java).apply {
-            putExtra("PART_TITLE", partTitle)
-            putExtra("PART_DESCRIPTION", partDescription)
-            putExtra("PART_IMAGE", imageResId)
+            putExtra("PART_TITLE", title)
+            putExtra("PART_DESCRIPTION", desc)
+            putExtra("PART_IMAGE", img)
         }
-
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "shared_part_transition")
-        startActivity(intent, options.toBundle())
+        val opts = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this, shared, "shared_part_transition"
+        )
+        startActivity(intent, opts.toBundle())
     }
 }

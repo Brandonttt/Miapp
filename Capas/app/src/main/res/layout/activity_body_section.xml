@@ -8,88 +8,93 @@
     android:background="?android:attr/colorBackground"
     tools:context=".BodySectionActivity">
 
-    <!-- Header con título y switch -->
+    <!-- Header unificado -->
     <LinearLayout
         android:id="@+id/section_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="16dp"
-        android:background="@color/purple_500"
-        android:gravity="center_vertical"
+        android:background="?attr/colorPrimary"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/section_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_white"
-            android:layout_marginTop="16dp"
-            tools:text="Cabeza" />
-
-        <!-- Switch para cambiar tema -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="16dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
 
             <TextView
+                android:id="@+id/section_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnPrimary"
+                tools:text="Cabeza" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🌙"
-                android:textSize="16sp"
-                android:layout_marginBottom="4dp" />
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <Switch
-                android:id="@+id/theme_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:thumbTint="@color/white"
-                android:trackTint="@color/purple_700" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌙"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="4dp"
+                    android:textColor="?attr/colorOnPrimary" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tema"
-                android:textSize="10sp"
-                android:textColor="@color/text_white"
-                android:layout_marginTop="2dp" />
+                <Switch
+                    android:id="@+id/theme_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumbTint="?attr/colorOnPrimary"
+                    android:trackTint="?attr/colorPrimaryVariant" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tema"
+                    android:textSize="10sp"
+                    android:layout_marginTop="2dp"
+                    android:textColor="?attr/colorOnPrimary" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Imagen principal de la sección -->
     <ImageView
         android:id="@+id/section_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        android:transitionName="shared_body_transition"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:contentDescription="Imagen de la sección del cuerpo"
-        android:transitionName="shared_body_transition"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/section_info_container"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/section_header"
+        app:layout_constraintBottom_toTopOf="@id/section_info_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section_header"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.9"
         tools:src="@drawable/head_detail" />
 
-    <!-- Container para puntos de interés -->
+    <!-- Contenedor para puntos de interés encima de la imagen -->
     <FrameLayout
         android:id="@+id/points_of_interest_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/section_image"
-        app:layout_constraintEnd_toEndOf="@+id/section_image"
-        app:layout_constraintStart_toStartOf="@+id/section_image"
-        app:layout_constraintTop_toTopOf="@+id/section_image">
+        app:layout_constraintTop_toTopOf="@id/section_image"
+        app:layout_constraintBottom_toBottomOf="@id/section_image"
+        app:layout_constraintStart_toStartOf="@id/section_image"
+        app:layout_constraintEnd_toEndOf="@id/section_image">
 
-        <!-- Puntos de interés para la cabeza -->
+        <!-- Puntos de interés Cabeza -->
         <View
             android:id="@+id/poi_eyes"
             android:layout_width="24dp"
@@ -99,7 +104,6 @@
             android:background="@drawable/poi_indicator"
             android:clickable="true"
             android:focusable="true"
-            android:transitionName="shared_part_transition"
             android:visibility="gone" />
 
         <View
@@ -111,7 +115,6 @@
             android:background="@drawable/poi_indicator"
             android:clickable="true"
             android:focusable="true"
-            android:transitionName="shared_part_transition"
             android:visibility="gone" />
 
         <View
@@ -123,10 +126,9 @@
             android:background="@drawable/poi_indicator"
             android:clickable="true"
             android:focusable="true"
-            android:transitionName="shared_part_transition"
             android:visibility="gone" />
 
-        <!-- Puntos de interés para el torso -->
+        <!-- Puntos de interés Torso -->
         <View
             android:id="@+id/poi_heart"
             android:layout_width="24dp"
@@ -135,9 +137,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="-30dp"
             android:background="@drawable/poi_indicator"
-            android:clickable="true"
-            android:focusable="true"
-            android:transitionName="shared_part_transition"
             android:visibility="gone" />
 
         <View
@@ -147,9 +146,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="-40dp"
             android:background="@drawable/poi_indicator"
-            android:clickable="true"
-            android:focusable="true"
-            android:transitionName="shared_part_transition"
             android:visibility="gone" />
 
         <View
@@ -159,12 +155,9 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:background="@drawable/poi_indicator"
-            android:clickable="true"
-            android:focusable="true"
-            android:transitionName="shared_part_transition"
             android:visibility="gone" />
 
-        <!-- Puntos de interés para las piernas -->
+        <!-- Puntos de interés Piernas -->
         <View
             android:id="@+id/poi_knee"
             android:layout_width="24dp"
@@ -172,9 +165,6 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="300dp"
             android:background="@drawable/poi_indicator"
-            android:clickable="true"
-            android:focusable="true"
-            android:transitionName="shared_part_transition"
             android:visibility="gone" />
 
         <View
@@ -184,9 +174,6 @@
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginTop="-20dp"
             android:background="@drawable/poi_indicator"
-            android:clickable="true"
-            android:focusable="true"
-            android:transitionName="shared_part_transition"
             android:visibility="gone" />
 
         <View
@@ -196,13 +183,11 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="180dp"
             android:background="@drawable/poi_indicator"
-            android:clickable="true"
-            android:focusable="true"
-            android:transitionName="shared_part_transition"
             android:visibility="gone" />
 
     </FrameLayout>
 
+    <!-- Panel info (fragment container) -->
     <FrameLayout
         android:id="@+id/section_info_container"
         android:layout_width="0dp"
@@ -212,7 +197,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/info_panel_background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

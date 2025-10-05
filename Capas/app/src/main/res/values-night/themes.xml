@@ -18,12 +18,9 @@
         <!-- Colores de texto -->
         <item name="android:textColorPrimary">@color/text_primary_dark</item>
         <item name="android:textColorSecondary">@color/text_secondary_dark</item>
-    </style>
 
-    <!-- Tema Oscuro Específico -->
-    <style name="Theme.Capas.Dark" parent="Base.Theme.Capas">
-        <!-- Forzar modo oscuro -->
-        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
+        <!-- Desactivar forzado de modo oscuro automático -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
     <!-- Tema principal que hereda de Base -->
