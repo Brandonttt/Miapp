@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+    <!-- Colores básicos -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="purple_500">#BB86FC</color>
@@ -20,19 +21,20 @@
     <color name="text_primary_light">#FFFFFF</color>
     <color name="text_secondary_light">#B3B3B3</color>
 
-    <!-- Colores para tema oscuro -->
+    <!-- Colores explícitos para tema oscuro -->
     <color name="background_dark">#121212</color>
     <color name="surface_dark">#1E1E1E</color>
     <color name="card_background_dark">#2D2D2D</color>
     <color name="text_primary_dark">#FFFFFF</color>
     <color name="text_secondary_dark">#B3B3B3</color>
 
-    <!-- Colores de texto -->
-    <color name="text_white">#FFFFFF</color>
-
-    <!-- Colores por defecto (TEMA OSCURO) -->
-    <color name="card_background">@color/card_background_dark</color>
+    <!-- Colores de texto para modo oscuro -->
+    <color name="text_white">#FFFFFFFF</color>
     <color name="text_primary">@color/text_primary_dark</color>
+    <color name="text_secondary">@color/text_secondary_dark</color>
+
+    <!-- Colores de superficie por defecto en modo oscuro -->
+    <color name="card_background">@color/card_background_dark</color>
 
     <!-- Colores de resaltado (iguales en ambos temas) -->
     <color name="highlight_eyes">#80FF5722</color>

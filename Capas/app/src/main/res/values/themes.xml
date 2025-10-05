@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme (TEMA CLARO) -->
+    <!-- Tema Base Claro -->
     <style name="Base.Theme.Capas" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Colores principales -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -8,19 +9,33 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Colores de superficie y fondo para tema claro -->
+        <!-- Colores de superficie y fondo -->
         <item name="android:colorBackground">@color/background_light</item>
         <item name="colorSurface">@color/surface_light</item>
         <item name="colorOnSurface">@color/text_primary_light</item>
         <item name="colorOnBackground">@color/text_primary_light</item>
+
+        <!-- Colores de texto -->
+        <item name="android:textColorPrimary">@color/text_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_secondary_light</item>
     </style>
 
-    <!-- Tema principal que hereda de Base -->
+    <!-- Tema Claro Específico -->
+    <style name="Theme.Capas.Light" parent="Base.Theme.Capas">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
+
+    <!-- Tema Oscuro Específico -->
+    <style name="Theme.Capas.Dark" parent="Base.Theme.Capas">
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/text_primary_dark</item>
+        <item name="colorOnBackground">@color/text_primary_dark</item>
+        <item name="android:textColorPrimary">@color/text_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+        <item name="colorPrimary">@color/purple_200</item>
+    </style>
+
+    <!-- Tema principal -->
     <style name="Theme.Capas" parent="Base.Theme.Capas" />
-
-    <!-- Tema sin ActionBar (NECESARIO para AndroidManifest) -->
-    <style name="Theme.Capas.NoActionBar" parent="Theme.Capas">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 </resources>

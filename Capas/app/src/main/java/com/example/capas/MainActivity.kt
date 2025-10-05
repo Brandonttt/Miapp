@@ -28,17 +28,16 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Aplicar tema inicial
-        applyCurrentTheme()
-
         // Configurar el switch de tema
         setupThemeSwitch()
 
         // Agregar fragmento de información
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.info_container, BodyInfoFragment.newInstance("Sistema del Cuerpo Humano",
-                    "Toca una región del cuerpo para explorar sus funciones y componentes"))
+                .replace(R.id.info_container, BodyInfoFragment.newInstance(
+                    "Sistema del Cuerpo Humano",
+                    "Toca una región del cuerpo para explorar sus funciones y componentes"
+                ))
                 .commit()
         }
 
@@ -46,32 +45,18 @@ class MainActivity : AppCompatActivity() {
         setupClickableRegions()
     }
 
-    private fun applyCurrentTheme() {
-        val rootView = findViewById<View>(R.id.main)
-        Log.d(TAG, "Applying current theme")
-        themeManager.applyThemeToView(this, rootView)
-    }
-
     private fun setupThemeSwitch() {
         val themeSwitch = findViewById<Switch>(R.id.theme_switch)
 
-        // Establecer estado inicial
-        themeSwitch.setOnCheckedChangeListener(null)
+        // Establecer estado inicial del switch
         val isDarkMode = themeManager.isDarkModeEnabled(this)
         themeSwitch.isChecked = isDarkMode
-        Log.d(TAG, "Switch initial state: $isDarkMode")
+        Log.d(TAG, "Switch initialized: $isDarkMode")
 
-        // Configurar listener
+        // Configurar listener del switch
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            Log.d(TAG, "Switch toggled to: $isChecked")
-
-            // Guardar preferencia
-            themeManager.setDarkModeEnabled(this, isChecked)
-
-            // Aplicar tema inmediatamente
-            applyCurrentTheme()
-
-            Log.d(TAG, "Theme applied, current mode: ${themeManager.isDarkModeEnabled(this)}")
+            Log.d(TAG, "Switch changed to: $isChecked")
+            themeManager.toggleTheme(this, isChecked)
         }
     }
 

@@ -2,20 +2,14 @@ package com.example.capas
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.view.View
-import android.widget.TextView
-import android.widget.LinearLayout
-import android.widget.FrameLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatDelegate
 import android.util.Log
 
 class ThemeManager private constructor() {
 
     companion object {
-        private const val PREFS_NAME = "theme_prefs"
-        private const val KEY_IS_DARK_MODE = "is_dark_mode"
+        private const val PREFS_NAME = "theme_preferences"
+        private const val KEY_IS_DARK_MODE = "is_dark_mode_enabled"
         private const val TAG = "ThemeManager"
 
         @Volatile
@@ -32,100 +26,58 @@ class ThemeManager private constructor() {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
+    /**
+     * Verifica si el modo oscuro está habilitado
+     */
     fun isDarkModeEnabled(context: Context): Boolean {
         val isDark = getSharedPreferences(context).getBoolean(KEY_IS_DARK_MODE, false)
         Log.d(TAG, "isDarkModeEnabled: $isDark")
         return isDark
     }
 
+    /**
+     * Guarda la preferencia de modo oscuro y aplica el tema inmediatamente
+     */
     fun setDarkModeEnabled(context: Context, enabled: Boolean) {
         Log.d(TAG, "setDarkModeEnabled: $enabled")
+
+        // Guardar la preferencia
         getSharedPreferences(context)
             .edit()
             .putBoolean(KEY_IS_DARK_MODE, enabled)
-            .apply()
+            .commit()
+
+        // Aplicar el tema inmediatamente usando AppCompatDelegate
+        applyThemeGlobally(enabled)
     }
 
-    fun applyTheme(context: Context) {
-        // Para compatibilidad - no hace nada
+    /**
+     * Aplica el tema globalmente usando AppCompatDelegate
+     */
+    private fun applyThemeGlobally(isDarkMode: Boolean) {
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            Log.d(TAG, "Applied DARK theme globally")
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            Log.d(TAG, "Applied LIGHT theme globally")
+        }
     }
 
-    fun applyThemeToView(context: Context, rootView: View) {
+    /**
+     * Inicializa el tema al arrancar la aplicación
+     */
+    fun initializeTheme(context: Context) {
         val isDarkMode = isDarkModeEnabled(context)
-        Log.d(TAG, "applyThemeToView: isDarkMode = $isDarkMode")
-        applyThemeRecursively(context, rootView, isDarkMode)
+        Log.d(TAG, "initializeTheme: $isDarkMode")
+        applyThemeGlobally(isDarkMode)
     }
 
-    private fun applyThemeRecursively(context: Context, view: View, isDarkMode: Boolean) {
-        when (view) {
-            is ConstraintLayout -> {
-                if (view.id == R.id.main || view.id == R.id.section_container || view.id == R.id.detail_container) {
-                    val backgroundColor = if (isDarkMode) {
-                        ContextCompat.getColor(context, R.color.background_dark)
-                    } else {
-                        ContextCompat.getColor(context, R.color.background_light)
-                    }
-                    Log.d(TAG, "Setting background for ${getViewName(view.id)} to ${if (isDarkMode) "dark" else "light"}")
-                    view.setBackgroundColor(backgroundColor)
-                }
-            }
-
-            is CardView -> {
-                if (view.id == R.id.main_card || view.id == R.id.body_container || view.id == R.id.info_container) {
-                    val cardColor = if (isDarkMode) {
-                        ContextCompat.getColor(context, R.color.card_background_dark)
-                    } else {
-                        ContextCompat.getColor(context, R.color.card_background_light)
-                    }
-                    Log.d(TAG, "Setting card background for ${getViewName(view.id)} to ${if (isDarkMode) "dark" else "light"}")
-                    view.setCardBackgroundColor(cardColor)
-                }
-            }
-
-            is TextView -> {
-                if (view.id != R.id.section_title &&
-                    view.id != R.id.main_title &&
-                    view.id != R.id.subtitle &&
-                    view.id != R.id.detail_title) {
-
-                    val textColor = if (isDarkMode) {
-                        ContextCompat.getColor(context, R.color.text_primary_dark)
-                    } else {
-                        ContextCompat.getColor(context, R.color.text_primary_light)
-                    }
-                    view.setTextColor(textColor)
-                }
-            }
-
-            is LinearLayout, is FrameLayout -> {
-                if (view.background != null) {
-                    val backgroundColor = if (isDarkMode) {
-                        ContextCompat.getColor(context, R.color.surface_dark)
-                    } else {
-                        ContextCompat.getColor(context, R.color.surface_light)
-                    }
-                    view.setBackgroundColor(backgroundColor)
-                }
-            }
-        }
-
-        // Aplicar recursivamente a vistas hijas
-        if (view is android.view.ViewGroup) {
-            for (i in 0 until view.childCount) {
-                applyThemeRecursively(context, view.getChildAt(i), isDarkMode)
-            }
-        }
-    }
-
-    private fun getViewName(id: Int): String {
-        return when (id) {
-            R.id.main -> "main"
-            R.id.section_container -> "section_container"
-            R.id.detail_container -> "detail_container"
-            R.id.main_card -> "main_card"
-            R.id.body_container -> "body_container"
-            R.id.info_container -> "info_container"
-            else -> "unknown_$id"
-        }
+    /**
+     * Cambia el tema (para uso con el switch)
+     */
+    fun toggleTheme(context: Context, newState: Boolean) {
+        Log.d(TAG, "toggleTheme to: $newState")
+        setDarkModeEnabled(context, newState)
     }
 }

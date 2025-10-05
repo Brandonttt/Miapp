@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,24 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Capas"
         tools:targetApi="31">
-        <activity
-            android:name=".BodyPartDetailActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Capas.NoActionBar" />
-        <activity
-            android:name=".BodySectionActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Capas.NoActionBar" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Capas.NoActionBar">
+            android:theme="@style/Theme.Capas">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <activity
+            android:name=".BodySectionActivity"
+            android:theme="@style/Theme.Capas" />
+
+        <activity
+            android:name=".BodyPartDetailActivity"
+            android:theme="@style/Theme.Capas" />
+    </application>
 </manifest>

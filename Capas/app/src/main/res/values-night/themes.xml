@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme para modo nocturno -->
+    <!-- Tema Base Oscuro -->
     <style name="Base.Theme.Capas" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Tema oscuro - colores para la noche -->
+        <!-- Colores principales para modo oscuro -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
@@ -14,12 +14,22 @@
         <item name="colorSurface">@color/surface_dark</item>
         <item name="colorOnSurface">@color/text_primary_dark</item>
         <item name="colorOnBackground">@color/text_primary_dark</item>
+
+        <!-- Colores de texto -->
+        <item name="android:textColorPrimary">@color/text_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+    </style>
+
+    <!-- Tema Oscuro Específico -->
+    <style name="Theme.Capas.Dark" parent="Base.Theme.Capas">
+        <!-- Forzar modo oscuro -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
     </style>
 
     <!-- Tema principal que hereda de Base -->
     <style name="Theme.Capas" parent="Base.Theme.Capas" />
 
-    <!-- Tema sin ActionBar (NECESARIO para AndroidManifest) -->
+    <!-- Tema sin ActionBar -->
     <style name="Theme.Capas.NoActionBar" parent="Theme.Capas">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

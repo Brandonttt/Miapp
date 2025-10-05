@@ -13,8 +13,6 @@ import androidx.core.view.WindowInsetsCompat
 
 class BodyPartDetailActivity : AppCompatActivity() {
 
-    private val themeManager = ThemeManager.getInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,9 +24,6 @@ class BodyPartDetailActivity : AppCompatActivity() {
             insets
         }
 
-        // Aplicar tema inicial
-        applyCurrentTheme()
-
         // Recibir datos del intent
         val partTitle = intent.getStringExtra("PART_TITLE") ?: "Parte del Cuerpo"
         val partDescription = intent.getStringExtra("PART_DESCRIPTION") ?: ""
@@ -39,14 +34,16 @@ class BodyPartDetailActivity : AppCompatActivity() {
         titleView.text = partTitle
 
         val descriptionView = findViewById<TextView>(R.id.detail_description)
-        descriptionView.text = partDescription
+        descriptionView?.text = partDescription
 
         val imageView = findViewById<ImageView>(R.id.detail_image)
-        imageView.setImageResource(partImageId)
+        imageView?.setImageResource(partImageId)
 
         // Aplicar animaciones
-        val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        imageView.startAnimation(fadeIn)
+        imageView?.let {
+            val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+            it.startAnimation(fadeIn)
+        }
 
         // Agregar fragmento de información detallada
         if (savedInstanceState == null) {
@@ -60,11 +57,6 @@ class BodyPartDetailActivity : AppCompatActivity() {
         setupButtons()
     }
 
-    private fun applyCurrentTheme() {
-        val rootView = findViewById<View>(R.id.detail_container)
-        themeManager.applyThemeToView(this, rootView)
-    }
-
     private fun setupButtons() {
         val backButton = findViewById<Button>(R.id.back_to_section_button)
         val shareButton = findViewById<Button>(R.id.share_button)
@@ -74,7 +66,22 @@ class BodyPartDetailActivity : AppCompatActivity() {
         }
 
         shareButton?.setOnClickListener {
-            // Implementar funcionalidad de compartir
+            shareBodyPartInfo()
         }
+    }
+
+    private fun shareBodyPartInfo() {
+        val partTitle = intent.getStringExtra("PART_TITLE") ?: "Parte del Cuerpo"
+        val partDescription = intent.getStringExtra("PART_DESCRIPTION") ?: ""
+
+        val shareIntent = android.content.Intent().apply {
+            action = android.content.Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(android.content.Intent.EXTRA_SUBJECT, "Información sobre: $partTitle")
+            putExtra(android.content.Intent.EXTRA_TEXT,
+                "🔬 $partTitle\n\n$partDescription\n\n📱 Compartido desde la App del Cuerpo Humano")
+        }
+
+        startActivity(android.content.Intent.createChooser(shareIntent, "Compartir información de $partTitle"))
     }
 }

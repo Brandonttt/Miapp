@@ -12,11 +12,13 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.view.animation.AnimationUtils
+import android.util.Log
 
 class BodySectionActivity : AppCompatActivity() {
 
     private lateinit var sectionTitle: String
     private val themeManager = ThemeManager.getInstance()
+    private val TAG = "BodySectionActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +30,6 @@ class BodySectionActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        // Aplicar tema inicial
-        applyCurrentTheme()
 
         // Recibir datos del intent
         sectionTitle = intent.getStringExtra("SECTION_TITLE") ?: "Sección del Cuerpo"
@@ -63,25 +62,18 @@ class BodySectionActivity : AppCompatActivity() {
         setupPointsOfInterest()
     }
 
-    private fun applyCurrentTheme() {
-        val rootView = findViewById<View>(R.id.section_container)
-        themeManager.applyThemeToView(this, rootView)
-    }
-
     private fun setupThemeSwitch() {
         val themeSwitch = findViewById<Switch>(R.id.theme_switch)
 
-        // Establecer estado inicial
-        themeSwitch.setOnCheckedChangeListener(null)
-        themeSwitch.isChecked = themeManager.isDarkModeEnabled(this)
+        // Establecer estado inicial del switch
+        val isDarkMode = themeManager.isDarkModeEnabled(this)
+        themeSwitch.isChecked = isDarkMode
+        Log.d(TAG, "Switch initialized: $isDarkMode")
 
-        // Configurar listener
+        // Configurar listener del switch
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            // Guardar preferencia
-            themeManager.setDarkModeEnabled(this, isChecked)
-
-            // Aplicar tema inmediatamente a esta vista
-            applyCurrentTheme()
+            Log.d(TAG, "Switch changed to: $isChecked")
+            themeManager.toggleTheme(this, isChecked)
         }
     }
 
@@ -100,19 +92,19 @@ class BodySectionActivity : AppCompatActivity() {
         val mouthPoint = container.findViewById<View>(R.id.poi_mouth)
         val brainPoint = container.findViewById<View>(R.id.poi_brain)
 
-        eyesPoint.visibility = View.VISIBLE
-        mouthPoint.visibility = View.VISIBLE
-        brainPoint.visibility = View.VISIBLE
+        eyesPoint?.visibility = View.VISIBLE
+        mouthPoint?.visibility = View.VISIBLE
+        brainPoint?.visibility = View.VISIBLE
 
-        eyesPoint.setOnClickListener {
+        eyesPoint?.setOnClickListener {
             navigateToDetailView("Ojos", "Órganos sensoriales responsables de la visión y percepción de luz.", R.drawable.eyes, it)
         }
 
-        mouthPoint.setOnClickListener {
+        mouthPoint?.setOnClickListener {
             navigateToDetailView("Boca", "Inicio del sistema digestivo y órgano clave para la comunicación verbal.", R.drawable.mouth, it)
         }
 
-        brainPoint.setOnClickListener {
+        brainPoint?.setOnClickListener {
             navigateToDetailView("Cerebro", "Centro de control del sistema nervioso y órgano principal del pensamiento.", R.drawable.brain, it)
         }
     }
@@ -122,19 +114,19 @@ class BodySectionActivity : AppCompatActivity() {
         val lungsPoint = container.findViewById<View>(R.id.poi_lungs)
         val stomachPoint = container.findViewById<View>(R.id.poi_stomach)
 
-        heartPoint.visibility = View.VISIBLE
-        lungsPoint.visibility = View.VISIBLE
-        stomachPoint.visibility = View.VISIBLE
+        heartPoint?.visibility = View.VISIBLE
+        lungsPoint?.visibility = View.VISIBLE
+        stomachPoint?.visibility = View.VISIBLE
 
-        heartPoint.setOnClickListener {
+        heartPoint?.setOnClickListener {
             navigateToDetailView("Corazón", "El corazón bombea sangre a todo el cuerpo a través del sistema circulatorio.", R.drawable.heart, it)
         }
 
-        lungsPoint.setOnClickListener {
+        lungsPoint?.setOnClickListener {
             navigateToDetailView("Pulmones", "Los pulmones son responsables del intercambio de oxígeno y dióxido de carbono.", R.drawable.lungs, it)
         }
 
-        stomachPoint.setOnClickListener {
+        stomachPoint?.setOnClickListener {
             navigateToDetailView("Estómago", "El estómago digiere los alimentos mediante ácidos y enzimas potentes.", R.drawable.stomach, it)
         }
     }
@@ -144,19 +136,19 @@ class BodySectionActivity : AppCompatActivity() {
         val thighPoint = container.findViewById<View>(R.id.poi_thigh)
         val footPoint = container.findViewById<View>(R.id.poi_foot)
 
-        kneePoint.visibility = View.VISIBLE
-        thighPoint.visibility = View.VISIBLE
-        footPoint.visibility = View.VISIBLE
+        kneePoint?.visibility = View.VISIBLE
+        thighPoint?.visibility = View.VISIBLE
+        footPoint?.visibility = View.VISIBLE
 
-        kneePoint.setOnClickListener {
+        kneePoint?.setOnClickListener {
             navigateToDetailView("Rodilla", "La rodilla es una articulación compleja que conecta el muslo con la pierna.", R.drawable.knee, it)
         }
 
-        thighPoint.setOnClickListener {
+        thighPoint?.setOnClickListener {
             navigateToDetailView("Muslo", "El muslo contiene algunos de los músculos más fuertes del cuerpo humano.", R.drawable.thigh, it)
         }
 
-        footPoint.setOnClickListener {
+        footPoint?.setOnClickListener {
             navigateToDetailView("Pie", "Los pies soportan el peso del cuerpo y son esenciales para la locomoción.", R.drawable.foot, it)
         }
     }
