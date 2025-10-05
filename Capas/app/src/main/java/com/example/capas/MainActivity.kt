@@ -56,10 +56,14 @@ class MainActivity : AppCompatActivity() {
         // Configurar listener del switch
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->
             Log.d(TAG, "Switch changed to: $isChecked")
+            // 1. Cambiar el tema a través del ThemeManager
             themeManager.toggleTheme(this, isChecked)
+
+            // 2. IMPORTANTE: Reiniciar la actividad para aplicar el nuevo tema inmediatamente
+            // Esto fuerza a la actividad a recrearse con los nuevos recursos.
+            recreate()
         }
     }
-
     private fun setupClickableRegions() {
         val headRegion = findViewById<View>(R.id.head_region)
         val torsoRegion = findViewById<View>(R.id.torso_region)

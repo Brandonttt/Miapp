@@ -73,7 +73,11 @@ class BodySectionActivity : AppCompatActivity() {
         // Configurar listener del switch
         themeSwitch.setOnCheckedChangeListener { _, isChecked ->
             Log.d(TAG, "Switch changed to: $isChecked")
+            // 1. Cambiar el tema a través del ThemeManager
             themeManager.toggleTheme(this, isChecked)
+
+            // 2. IMPORTANTE: Reiniciar la actividad para aplicar el nuevo tema inmediatamente
+            recreate()
         }
     }
 
