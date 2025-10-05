@@ -1,4 +1,4 @@
-# 🌈 Capas App
+#  Capas App
 
 ¡Bienvenido a **Capas**, una app Android que te lleva a través de una jerarquía de niveles con transiciones animadas y selector de tema claro/oscuro! 🚀
 
